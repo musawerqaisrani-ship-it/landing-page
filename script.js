@@ -5,67 +5,67 @@ const orderForm = document.getElementById("orderForm");
 
 const API_URL = "https://script.google.com/macros/s/AKfycbzPp0INEFbok-kQG08nt0D9YrWzJNMrH_drJP2ODTPbuYe8o5c-hRdlJMVNQRLEN2BT/exec";
 
-orderBtn.onclick = () => {
+// Open Popup
+orderBtn.addEventListener("click", () => {
     popup.classList.add("active");
-};
+});
 
-closePopup.onclick = () => {
+// Close Popup
+closePopup.addEventListener("click", () => {
     popup.classList.remove("active");
-};
+});
 
-window.onclick = (e) => {
-    if (e.target == popup) {
+// Close when clicking outside
+window.addEventListener("click", (e) => {
+    if (e.target === popup) {
         popup.classList.remove("active");
     }
-};
+});
 
-orderForm.addEventListener("submit", async function(e){
+// Submit Order
+orderForm.addEventListener("submit", async function (e) {
 
     e.preventDefault();
 
-    const orderData = {
+    const submitBtn = document.querySelector(".submit-btn");
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Submitting...";
 
+    const orderData = {
         name: document.getElementById("name").value,
         phone: document.getElementById("phone").value,
         city: document.getElementById("city").value,
         address: document.getElementById("address").value,
         quantity: document.getElementById("quantity").value,
         product: "Premium Product"
-
     };
 
-    try{
+    try {
 
-        const response = await fetch(API_URL,{
-
-            method:"POST",
-
-            body:JSON.stringify(orderData)
-
+        await fetch(API_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(orderData)
         });
 
-        const result = await response.json();
+        alert("✅ Your order has been received successfully!");
 
-        if(result.success){
+        orderForm.reset();
 
-            alert("✅ Order Submitted Successfully!");
+        popup.classList.remove("active");
 
-            orderForm.reset();
+    } catch (error) {
 
-            popup.classList.remove("active");
+        alert("❌ Failed to submit order. Please try again.");
 
-        }else{
-
-            alert("Something went wrong.");
-
-        }
-
-    }catch(err){
-
-        alert("Server Error!");
-
-        console.log(err);
+        console.error(error);
 
     }
+
+    submitBtn.disabled = false;
+    submitBtn.innerText = "Submit Order";
 
 });
