@@ -9,11 +9,11 @@ function doPost(e) {
 
     const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
 
-    let sheet = ss.getSheetByName(SHEET_NAME);
+    let sheet = ss.getSheetByName(Orders);
 
     if (!sheet) {
 
-      sheet = ss.insertSheet(SHEET_NAME);
+      sheet = ss.insertSheet(Orders);
 
       sheet.appendRow([
         "Timestamp",
