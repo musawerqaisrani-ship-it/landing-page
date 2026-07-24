@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Order Landing Page</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="hero">
+
+<div class="container">
+
+<div class="left">
+
+<span class="badge">🔥 Limited Time Offer</span>
+
+<h1>Premium Product</h1>
+
+<p>
+High Quality Product with Fast Delivery and Cash on Delivery all over Pakistan.
+</p>
+
+<div class="price">
+
+<span class="old-price">Rs.3999</span>
+
+<span class="new-price">Rs.1999</span>
+
+</div>
+
+<button id="orderBtn" class="btn">
+Order Now
+</button>
+
+</div>
+
+<div class="right">
+
+<img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800" alt="Product">
+
+</div>
+
+</div>
+
+</header>
+
+<section class="features">
+
+<h2>Why Choose Us?</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Premium Quality</h3>
+<p>100% Original Product.</p>
+</div>
+
+<div class="card">
+<h3>Fast Delivery</h3>
+<p>Delivery within 2-4 working days.</p>
+</div>
+
+<div class="card">
+<h3>Cash on Delivery</h3>
+<p>Pay after receiving your parcel.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ORDER POPUP -->
+
+<div class="popup" id="popup">
+
+<div class="popup-box">
+
+<span id="closePopup" class="close">&times;</span>
+
+<h2>Place Your Order</h2>
+
+<form id="orderForm">
+
+<div class="input-group">
+
+<label>Full Name</label>
+
+<input
+type="text"
+id="name"
+placeholder="Enter Your Name"
+required>
+
+</div>
+
+<div class="input-group">
+
+<label>Phone Number</label>
+
+<input
+type="text"
+id="phone"
+placeholder="03XXXXXXXXX"
+required>
+
+</div>
+
+<div class="input-group">
+
+<label>City</label>
+
+<input
+type="text"
+id="city"
+placeholder="Your City"
+required>
+
+</div>
+
+<div class="input-group">
+
+<label>Address</label>
+
+<textarea
+id="address"
+rows="3"
+placeholder="Complete Address"
+required></textarea>
+
+</div>
+
+<div class="input-group">
+
+<label>Quantity</label>
+
+<input
+type="number"
+id="quantity"
+value="1"
+min="1">
+
+</div>
+
+<button
+type="submit"
+class="submit-btn">
+
+Place Order on WhatsApp
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
