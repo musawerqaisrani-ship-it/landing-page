@@ -3,60 +3,69 @@ const popup = document.getElementById("popup");
 const closePopup = document.getElementById("closePopup");
 const orderForm = document.getElementById("orderForm");
 
-orderBtn.addEventListener("click", () => {
+const API_URL = "https://script.google.com/macros/s/AKfycbzPp0INEFbok-kQG08nt0D9YrWzJNMrH_drJP2ODTPbuYe8o5c-hRdlJMVNQRLEN2BT/exec";
+
+orderBtn.onclick = () => {
     popup.classList.add("active");
-    document.body.style.overflow = "hidden";
-});
+};
 
-closePopup.addEventListener("click", () => {
+closePopup.onclick = () => {
     popup.classList.remove("active");
-    document.body.style.overflow = "auto";
-});
+};
 
-popup.addEventListener("click", function(e){
-    if(e.target === popup){
+window.onclick = (e) => {
+    if (e.target == popup) {
         popup.classList.remove("active");
-        document.body.style.overflow = "auto";
     }
-});
+};
 
-orderForm.addEventListener("submit", function(e){
+orderForm.addEventListener("submit", async function(e){
 
     e.preventDefault();
 
-    const name = document.getElementById("name").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const city = document.getElementById("city").value.trim();
-    const address = document.getElementById("address").value.trim();
-    const quantity = document.getElementById("quantity").value;
+    const orderData = {
 
-    if(name==="" || phone==="" || city==="" || address===""){
-        alert("Please fill all fields.");
-        return;
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        city: document.getElementById("city").value,
+        address: document.getElementById("address").value,
+        quantity: document.getElementById("quantity").value,
+        product: "Premium Product"
+
+    };
+
+    try{
+
+        const response = await fetch(API_URL,{
+
+            method:"POST",
+
+            body:JSON.stringify(orderData)
+
+        });
+
+        const result = await response.json();
+
+        if(result.success){
+
+            alert("✅ Order Submitted Successfully!");
+
+            orderForm.reset();
+
+            popup.classList.remove("active");
+
+        }else{
+
+            alert("Something went wrong.");
+
+        }
+
+    }catch(err){
+
+        alert("Server Error!");
+
+        console.log(err);
+
     }
-
-    const message =
-`🛒 *NEW ORDER*
-
-📦 Product: Premium Product
-
-👤 Name: ${name}
-
-📞 Phone: ${phone}
-
-🏙️ City: ${city}
-
-🏠 Address: ${address}
-
-🔢 Quantity: ${quantity}
-
-💰 Price: Rs.1999
-
-Please confirm my order.`;
-
-    const whatsapp =
-`https://wa.me/923417087991?text=${encodeURIComponent(message)}`;
-
-    window.open(whatsapp,"_blank");
 
 });
