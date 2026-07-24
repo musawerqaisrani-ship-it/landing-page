@@ -6,7 +6,7 @@
 
 // Google Apps Script Web App Endpoint URL
 const SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbzPp0INEFbok-kQG08nt0D9YrWzJNMrH_drJP2ODTPbuYe8o5c-hRdlJMVNQRLEN2BT/exec";
+    "https://script.google.com/macros/s/AKfycbx8Wi1RNVJrjHARqEvkRoqLns-AnxJUWdynEA30R81URSF4fJ86b2AQ11QCVXobgHW-lg/exec";
 
 // DOM Element References
 const orderBtn = document.getElementById("orderBtn");
