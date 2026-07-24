@@ -1,107 +1,172 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPp0INEFbok-kQG08nt0D9YrWzJNMrH_drJP2ODTPbuYe8o5c-hRdlJMVNQRLEN2BT/exec";
+/**
+ * ============================================================
+ * MOSAWER SHOPs — Frontend Script for GitHub Pages
+ * ============================================================
+ */
 
+// Google Apps Script Web App Endpoint URL
+const SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbzPp0INEFbok-kQG08nt0D9YrWzJNMrH_drJP2ODTPbuYe8o5c-hRdlJMVNQRLEN2BT/exec";
+
+// DOM Element References
 const orderBtn = document.getElementById("orderBtn");
 const popup = document.getElementById("popup");
 const closePopup = document.getElementById("closePopup");
 const orderForm = document.getElementById("orderForm");
-
+const formMessage = document.getElementById("formMessage");
 const submitBtn = document.getElementById("submitBtn");
 const submitBtnText = document.getElementById("submitBtnText");
-const formMessage = document.getElementById("formMessage");
 
-orderBtn.addEventListener("click", () => {
+// Open Popup Modal
+function openPopupModal() {
+    if (!popup) return;
     popup.classList.add("active");
-});
+    document.body.style.overflow = "hidden";
+}
 
-closePopup.addEventListener("click", () => {
+// Close Popup Modal
+function closePopupModal() {
+    if (!popup) return;
     popup.classList.remove("active");
-    clearMessage();
-});
+    document.body.style.overflow = "auto";
+    clearFormMessage();
+}
 
-window.addEventListener("click", (e) => {
-    if (e.target === popup) {
-        popup.classList.remove("active");
-        clearMessage();
+// Event Listeners for Opening / Closing Modal
+if (orderBtn) {
+    orderBtn.addEventListener("click", openPopupModal);
+}
+
+if (closePopup) {
+    closePopup.addEventListener("click", closePopupModal);
+}
+
+if (popup) {
+    popup.addEventListener("click", function (e) {
+        if (e.target === popup) {
+            closePopupModal();
+        }
+    });
+}
+
+// Close Popup on Escape Key
+document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && popup && popup.classList.contains("active")) {
+        closePopupModal();
     }
 });
 
-function showMessage(text, type) {
-    formMessage.innerHTML = text;
-    formMessage.className = "form-message show " + type;
+// Display Form Success / Error Message
+function showFormMessage(text, type) {
+    if (!formMessage) return;
+    formMessage.textContent = text;
+    formMessage.className = "form-message show " + type; // "success" or "error"
 }
 
-function clearMessage() {
-    formMessage.innerHTML = "";
+// Clear Form Message
+function clearFormMessage() {
+    if (!formMessage) return;
+    formMessage.textContent = "";
     formMessage.className = "form-message";
 }
 
-function loading(state) {
-    submitBtn.disabled = state;
+// Set Loading State for Submit Button
+function setLoadingState(isLoading) {
+    if (!submitBtn) return;
+    submitBtn.disabled = isLoading;
 
-    if (state) {
+    if (isLoading) {
         submitBtn.classList.add("loading");
-        submitBtnText.innerHTML = "Submitting...";
+        if (submitBtnText) submitBtnText.textContent = "Placing Order...";
     } else {
         submitBtn.classList.remove("loading");
-        submitBtnText.innerHTML = "Place Order";
+        if (submitBtnText) submitBtnText.textContent = "Place Order";
     }
 }
 
-orderForm.addEventListener("submit", async function (e) {
+// Handle Form Submission
+if (orderForm) {
+    orderForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        clearFormMessage();
 
-    e.preventDefault();
+        const nameInput = document.getElementById("name");
+        const phoneInput = document.getElementById("phone");
+        const cityInput = document.getElementById("city");
+        const addressInput = document.getElementById("address");
+        const quantityInput = document.getElementById("quantity");
 
-    clearMessage();
+        const name = nameInput ? nameInput.value.trim() : "";
+        const phone = phoneInput ? phoneInput.value.trim() : "";
+        const city = cityInput ? cityInput.value.trim() : "";
+        const address = addressInput ? addressInput.value.trim() : "";
+        const quantity = quantityInput ? quantityInput.value.trim() : "1";
 
-    loading(true);
-
-    const data = {
-        product: "Premium Product",
-        name: document.getElementById("name").value.trim(),
-        phone: document.getElementById("phone").value.trim(),
-        city: document.getElementById("city").value.trim(),
-        address: document.getElementById("address").value.trim(),
-        quantity: document.getElementById("quantity").value,
-        price: "1999"
-    };
-
-    try {
-
-        const response = await fetch(SCRIPT_URL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8"
-            },
-            body: JSON.stringify(data)
-        });
-
-        const result = await response.json();
-
-        if (result.status === "success") {
-
-            showMessage("✅ Order Submitted Successfully!", "success");
-
-            orderForm.reset();
-
-            setTimeout(() => {
-                popup.classList.remove("active");
-                clearMessage();
-            }, 1500);
-
-        } else {
-
-            showMessage("❌ " + result.message, "error");
-
+        // Client-side validation
+        if (!name || !phone || !city || !address) {
+            showFormMessage("Please fill in all required fields.", "error");
+            return;
         }
 
-    } catch (err) {
+        // Phone number validation (at least 7 digits)
+        const phoneClean = phone.replace(/[\s\-\+\(\)]/g, "");
+        if (phoneClean.length < 7 || isNaN(phoneClean)) {
+            showFormMessage("Please enter a valid phone number.", "error");
+            return;
+        }
 
-        console.error(err);
+        const payload = {
+            timestamp: new Date().toLocaleString("en-US", { timeZone: "Asia/Karachi" }),
+            product: "MOSAWER SHOP Product",
+            name: name,
+            phone: phone,
+            city: city,
+            address: address,
+            quantity: quantity,
+            price: "Rs.1999"
+        };
 
-        showMessage("❌ Server Error. Please try again.", "error");
+        setLoadingState(true);
 
-    }
+        try {
+            // Note: Sending body as text/plain prevents browser CORS OPTIONS preflight
+            // while allowing Google Apps Script doPost to receive and parse the JSON string.
+            const response = await fetch(SCRIPT_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8"
+                },
+                body: JSON.stringify(payload),
+                redirect: "follow"
+            });
 
-    loading(false);
+            const responseText = await response.text();
+            let result;
 
-});
+            try {
+                result = JSON.parse(responseText);
+            } catch (jsonErr) {
+                console.error("Non-JSON response received:", responseText);
+                throw new Error("Server returned an invalid response format.");
+            }
+
+            if (result && result.status === "success") {
+                showFormMessage("✅ Order Placed Successfully! We will contact you soon.", "success");
+                orderForm.reset();
+
+                // Close popup after 2 seconds to let customer read confirmation
+                setTimeout(() => {
+                    closePopupModal();
+                }, 2000);
+            } else {
+                const errorText = (result && result.message) ? result.message : "Could not submit your order. Please try again.";
+                showFormMessage("❌ " + errorText, "error");
+            }
+        } catch (err) {
+            console.error("Order submission error:", err);
+            showFormMessage("❌ Could not submit your order. Please check your internet connection or server deployment.", "error");
+        } finally {
+            setLoadingState(false);
+        }
+    });
+}
