@@ -9,6 +9,7 @@ const SCRIPT_URL =
 
 // DOM Elements
 const orderBtn = document.getElementById("orderBtn");
+const stickyOrderBtn = document.getElementById("stickyOrderBtn");
 const addToCartBtn = document.getElementById("addToCartBtn");
 const popup = document.getElementById("popup");
 const closePopup = document.getElementById("closePopup");
@@ -61,7 +62,7 @@ if (popupQuantityInput) {
 }
 
 // Image Gallery Switcher
-function changeImage(src) {
+function changeImage(src, element) {
     const mainImg = document.getElementById("mainProductImg");
     if (mainImg) {
         mainImg.src = src;
@@ -69,8 +70,8 @@ function changeImage(src) {
     
     const thumbs = document.querySelectorAll(".thumb-item");
     thumbs.forEach(t => t.classList.remove("active"));
-    if (window.event && window.event.currentTarget) {
-        window.event.currentTarget.classList.add("active");
+    if (element) {
+        element.classList.add("active");
     }
 }
 
@@ -89,6 +90,7 @@ function closePopupModal() {
 }
 
 if (orderBtn) orderBtn.addEventListener("click", openPopupModal);
+if (stickyOrderBtn) stickyOrderBtn.addEventListener("click", openPopupModal);
 if (addToCartBtn) addToCartBtn.addEventListener("click", openPopupModal);
 if (closePopup) closePopup.addEventListener("click", closePopupModal);
 

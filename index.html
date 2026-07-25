@@ -2,20 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Rivaaj Mahal Hair Oil - 100% Organic Herbs Formula for Hair Fall & Growth. Order with Cash on Delivery in Pakistan.">
     <title>Rivaaj Mahal Hair Oil - Buy with Cash on Delivery</title>
 
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <!-- TOP ANNOUNCEMENT BAR -->
     <div class="announcement-bar">
-        🎉 Limited Time Sale - Free Cash on Delivery Nationwide!
+        <span>🎉 Limited Time Sale — Free Cash on Delivery Nationwide!</span>
     </div>
 
     <!-- MAIN PRODUCT SECTION -->
@@ -25,21 +25,22 @@
             <!-- LEFT: PRODUCT IMAGES & GALLERY -->
             <div class="gallery-column">
                 <div class="main-image-wrapper">
+                    <span class="discount-tag">-20% OFF</span>
                     <img id="mainProductImg" src="images/product.jpg" alt="Rivaaj Mahal Hair Oil">
                 </div>
                 
                 <!-- THUMBNAIL GALLERY ROW -->
                 <div class="thumbnail-row">
-                    <div class="thumb-item active" onclick="changeImage('images/product.jpg')">
+                    <div class="thumb-item active" onclick="changeImage('images/product.jpg', this)">
                         <img src="images/product.jpg" alt="Thumbnail 1">
                     </div>
-                    <div class="thumb-item" onclick="changeImage('images/product.jpg')">
+                    <div class="thumb-item" onclick="changeImage('images/product.jpg', this)">
                         <img src="images/product.jpg" alt="Thumbnail 2">
                     </div>
-                    <div class="thumb-item" onclick="changeImage('images/product.jpg')">
+                    <div class="thumb-item" onclick="changeImage('images/product.jpg', this)">
                         <img src="images/product.jpg" alt="Thumbnail 3">
                     </div>
-                    <div class="thumb-item" onclick="changeImage('images/product.jpg')">
+                    <div class="thumb-item" onclick="changeImage('images/product.jpg', this)">
                         <img src="images/product.jpg" alt="Thumbnail 4">
                     </div>
                 </div>
@@ -47,99 +48,134 @@
 
             <!-- RIGHT: PRODUCT DETAILS & PURCHASING -->
             <div class="details-column">
+                <!-- RATING & REVIEWS (MOVED TOP FOR MOBILE TRUST) -->
+                <div class="reviews-rating">
+                    <span class="stars">★★★★★</span>
+                    <span class="review-count">5.0 (50,000+ Verified Reviews)</span>
+                </div>
+
                 <h1 class="product-title">Rivaaj Mahal Hair Oil</h1>
 
                 <!-- PRICE & SALE BADGE -->
                 <div class="price-container">
                     <span class="old-price">Rs.2,499.00</span>
                     <span class="current-price">Rs.2,000.00</span>
-                    <span class="sale-badge">Sale</span>
+                    <span class="sale-badge">SALE</span>
                 </div>
 
-                <p class="shipping-note"><u>Shipping</u> calculated at checkout.</p>
+                <p class="shipping-note">Free Shipping & Cash on Delivery across Pakistan</p>
 
                 <!-- DELIVERY BANNER -->
-                <div class="delivery-banner">
-                    🚚 Order will be deliver within 2 to 5 days
-                </div>
-
-                <div class="guarantee-text">
-                    100% Organic Products
-                </div>
-
-                <!-- RATING & REVIEWS -->
-                <div class="reviews-rating">
-                    <span class="stars">★★★★★</span>
-                    <span class="review-count">(50000+ Reviews)</span>
+                <div class="delivery-card">
+                    <div class="delivery-icon">🚚</div>
+                    <div class="delivery-info">
+                        <strong>Fast Delivery Nationwide</strong>
+                        <span>Parcel delivered in 2 to 5 working days</span>
+                    </div>
                 </div>
 
                 <!-- VARIANT OPTION -->
                 <div class="option-section">
-                    <label class="option-label">Quantity</label>
+                    <label class="option-label">Select Package:</label>
                     <div class="variant-pills">
-                        <button class="pill-btn active">1 Bottle</button>
+                        <button class="pill-btn active">🌿 1 Bottle (225ml)</button>
                     </div>
                 </div>
 
                 <!-- QUANTITY STEPPER -->
                 <div class="quantity-section">
-                    <label class="option-label">Quantity</label>
+                    <label class="option-label">Quantity:</label>
                     <div class="quantity-stepper">
-                        <button type="button" class="step-btn" id="minusBtn">-</button>
+                        <button type="button" class="step-btn" id="minusBtn" aria-label="Decrease quantity">-</button>
                         <input type="number" id="qtyInput" value="1" min="1" max="10" readonly>
-                        <button type="button" class="step-btn" id="plusBtn">+</button>
+                        <button type="button" class="step-btn" id="plusBtn" aria-label="Increase quantity">+</button>
                     </div>
                 </div>
 
                 <!-- ACTION BUTTONS -->
                 <div class="action-buttons">
-                    <button id="addToCartBtn" class="btn-outline">Add to cart</button>
                     <button id="orderBtn" class="btn-solid-black">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="9" cy="21" r="1"></circle>
                             <circle cx="20" cy="21" r="1"></circle>
                             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                         </svg>
                         Buy with Cash on Delivery
                     </button>
+                    <button id="addToCartBtn" class="btn-outline">Add to Cart</button>
+                </div>
+
+                <!-- TRUST BADGES GRID -->
+                <div class="trust-grid">
+                    <div class="trust-item">
+                        <span class="trust-icon">🌿</span>
+                        <span>100% Organic</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">💵</span>
+                        <span>Pay on Delivery</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">✨</span>
+                        <span>20+ Herbs</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">💯</span>
+                        <span>Quality Tested</span>
+                    </div>
                 </div>
 
                 <!-- BULLET DETAILS -->
-                <ul class="product-features">
-                    <li>Organic Ingredients.</li>
-                    <li>Nourish • Cleanse • Grow.</li>
-                    <li>100% Herbal Formula with 20+ Herbs.</li>
-                    <li>Reduces Hair Fall & Stimulates Growth.</li>
-                    <li>Provides Strong & Shine Hairs.</li>
-                </ul>
+                <div class="product-description">
+                    <h3>Key Benefits:</h3>
+                    <ul class="product-features">
+                        <li><strong>Reduce Hair Fall:</strong> Strengthens hair roots naturally.</li>
+                        <li><strong>Stimulate Growth:</strong> Promotes new hair follicles.</li>
+                        <li><strong>20+ Herbal Formula:</strong> Infused with Amla, Reetha, Shikakai & Essential Oils.</li>
+                        <li><strong>Strong & Shiny:</strong> Restores natural shine and softness.</li>
+                    </ul>
+                </div>
             </div>
 
         </div>
     </main>
 
-    <!-- ORDER POPUP MODAL -->
+    <!-- MOBILE STICKY BOTTOM ACTION BAR -->
+    <div class="sticky-bottom-bar">
+        <div class="sticky-price-info">
+            <span class="sticky-title">Rivaaj Mahal Hair Oil</span>
+            <span class="sticky-price">Rs. 2,000</span>
+        </div>
+        <button id="stickyOrderBtn" class="sticky-buy-btn">
+            Buy Now (COD)
+        </button>
+    </div>
+
+    <!-- ORDER POPUP MODAL (MOBILE BOTTOM SHEET STYLED) -->
     <div class="popup" id="popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
         <div class="popup-box">
+            <div class="drag-handle"></div>
             <span id="closePopup" class="close" aria-label="Close popup">&times;</span>
-            <h2 id="popupTitle">Checkout — Cash on Delivery</h2>
-            <p class="popup-subtitle">Enter your details to confirm your order.</p>
+            
+            <h2 id="popupTitle">Order Now — Cash on Delivery</h2>
+            <p class="popup-subtitle">Fill your delivery address below to place your order.</p>
 
             <div id="formMessage" class="form-message" role="alert" aria-live="polite"></div>
 
             <form id="orderForm">
                 <div class="input-group">
                     <label for="name">Full Name *</label>
-                    <input type="text" id="name" placeholder="Enter Your Full Name" required>
+                    <input type="text" id="name" placeholder="Enter Your Full Name" autocomplete="name" required>
                 </div>
 
                 <div class="input-group">
                     <label for="phone">Phone Number *</label>
-                    <input type="tel" id="phone" placeholder="03XXXXXXXXX" required>
+                    <input type="tel" id="phone" placeholder="03XXXXXXXXX" autocomplete="tel" required>
                 </div>
 
                 <div class="input-group">
                     <label for="city">City *</label>
-                    <input type="text" id="city" placeholder="Your City" required>
+                    <input type="text" id="city" placeholder="e.g. Lahore, Karachi, Islamabad" required>
                 </div>
 
                 <div class="input-group">
@@ -154,11 +190,15 @@
 
                 <div class="order-summary-box">
                     <div class="summary-row">
-                        <span>Item:</span>
+                        <span>Product:</span>
                         <strong>Rivaaj Mahal Hair Oil</strong>
                     </div>
                     <div class="summary-row">
-                        <span>Total Price:</span>
+                        <span>Shipping Fee:</span>
+                        <strong class="free-shipping-tag">FREE (COD)</strong>
+                    </div>
+                    <div class="summary-row total-row">
+                        <span>Total Amount:</span>
                         <strong id="totalPriceDisplay">Rs. 2,000.00</strong>
                     </div>
                 </div>
