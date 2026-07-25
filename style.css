@@ -440,7 +440,7 @@ body {
 }
 
 /* ============================================================
-   POPUP MODAL STYLING (MOBILE BOTTOM SHEET)
+   POPUP MODAL STYLING
    ============================================================ */
 
 .popup {
@@ -635,6 +635,83 @@ body {
 .form-message.show { display: block; }
 .form-message.show.success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
 .form-message.show.error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+
+/* ============================================================
+   THANK YOU SUCCESS STEP STYLES
+   ============================================================ */
+
+.success-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.success-checkmark-circle {
+    width: 72px;
+    height: 72px;
+    background: #f0fdf4;
+    border: 2px solid #86efac;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(34, 197, 94, 0.2);
+    animation: circleScale 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes circleScale {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.success-title-en {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f172a;
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.success-title-ur {
+    font-size: 18px;
+    font-weight: 700;
+    color: #166534;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.success-details-card {
+    background: #f0fdf4;
+    border: 1.5px solid #bbf7d0;
+    border-radius: 16px;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+}
+
+.success-text-en {
+    font-size: 13.5px;
+    color: #166534;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.success-divider {
+    border: none;
+    border-top: 1px dashed #86efac;
+    margin: 10px 0;
+}
+
+.success-text-ur {
+    font-size: 14px;
+    color: #14532d;
+    line-height: 1.6;
+    text-align: center;
+    direction: rtl;
+}
+
+.order-again-btn {
+    margin-top: 10px;
+}
 
 footer {
     text-align: center;

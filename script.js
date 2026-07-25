@@ -18,6 +18,10 @@ const formMessage = document.getElementById("formMessage");
 const submitBtn = document.getElementById("submitBtn");
 const submitBtnText = document.getElementById("submitBtnText");
 
+const formStep = document.getElementById("formStep");
+const successStep = document.getElementById("successStep");
+const orderAgainBtn = document.getElementById("orderAgainBtn");
+
 const qtyInput = document.getElementById("qtyInput");
 const minusBtn = document.getElementById("minusBtn");
 const plusBtn = document.getElementById("plusBtn");
@@ -75,6 +79,20 @@ function changeImage(src, element) {
     }
 }
 
+// Step View Switchers
+function showSuccessScreen() {
+    if (formStep) formStep.style.display = "none";
+    if (successStep) successStep.style.display = "block";
+}
+
+function resetToFormScreen() {
+    if (orderForm) orderForm.reset();
+    updateQuantity(1);
+    clearFormMessage();
+    if (successStep) successStep.style.display = "none";
+    if (formStep) formStep.style.display = "block";
+}
+
 // Modal Open / Close
 function openPopupModal() {
     if (!popup) return;
@@ -86,13 +104,20 @@ function closePopupModal() {
     if (!popup) return;
     popup.classList.remove("active");
     document.body.style.overflow = "auto";
-    clearFormMessage();
+    setTimeout(() => {
+        resetToFormScreen();
+    }, 300);
 }
 
 if (orderBtn) orderBtn.addEventListener("click", openPopupModal);
 if (stickyOrderBtn) stickyOrderBtn.addEventListener("click", openPopupModal);
 if (addToCartBtn) addToCartBtn.addEventListener("click", openPopupModal);
 if (closePopup) closePopup.addEventListener("click", closePopupModal);
+
+// Clicking "Order Again" closes popup completely and returns to main website page
+if (orderAgainBtn) {
+    orderAgainBtn.addEventListener("click", closePopupModal);
+}
 
 if (popup) {
     popup.addEventListener("click", function (e) {
@@ -195,13 +220,8 @@ if (orderForm) {
             }
 
             if (result && result.status === "success") {
-                showFormMessage("✅ Order Placed Successfully! We will deliver within 2 to 5 days.", "success");
-                orderForm.reset();
-                updateQuantity(1);
-
-                setTimeout(() => {
-                    closePopupModal();
-                }, 2200);
+                // Show professional Thank You step inside the popup modal
+                showSuccessScreen();
             } else {
                 const errorText = (result && result.message) ? result.message : "Could not submit your order.";
                 showFormMessage("❌ " + errorText, "error");

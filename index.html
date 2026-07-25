@@ -48,7 +48,7 @@
 
             <!-- RIGHT: PRODUCT DETAILS & PURCHASING -->
             <div class="details-column">
-                <!-- RATING & REVIEWS (MOVED TOP FOR MOBILE TRUST) -->
+                <!-- RATING & REVIEWS -->
                 <div class="reviews-rating">
                     <span class="stars">★★★★★</span>
                     <span class="review-count">5.0 (50,000+ Verified Reviews)</span>
@@ -70,7 +70,7 @@
                     <div class="delivery-icon">🚚</div>
                     <div class="delivery-info">
                         <strong>Fast Delivery Nationwide</strong>
-                        <span>Parcel delivered in 2 - 5 working days</span>
+                        <span>Parcel delivered in 2 to 5 working days</span>
                     </div>
                 </div>
 
@@ -151,63 +151,91 @@
         </button>
     </div>
 
-    <!-- ORDER POPUP MODAL (MOBILE BOTTOM SHEET STYLED) -->
+    <!-- ORDER POPUP MODAL -->
     <div class="popup" id="popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
         <div class="popup-box">
             <div class="drag-handle"></div>
             <span id="closePopup" class="close" aria-label="Close popup">&times;</span>
             
-            <h2 id="popupTitle">Order Now — Cash on Delivery</h2>
-            <p class="popup-subtitle">Fill your delivery address below to place your order.</p>
+            <!-- STEP 1: FORM -->
+            <div id="formStep" class="popup-step">
+                <h2 id="popupTitle">Order Now — Cash on Delivery</h2>
+                <p class="popup-subtitle">Fill your delivery address below to place your order.</p>
 
-            <div id="formMessage" class="form-message" role="alert" aria-live="polite"></div>
+                <div id="formMessage" class="form-message" role="alert" aria-live="polite"></div>
 
-            <form id="orderForm">
-                <div class="input-group">
-                    <label for="name">Full Name *</label>
-                    <input type="text" id="name" placeholder="Enter Your Full Name" autocomplete="name" required>
-                </div>
-
-                <div class="input-group">
-                    <label for="phone">Phone Number *</label>
-                    <input type="tel" id="phone" placeholder="03XXXXXXXXX" autocomplete="tel" required>
-                </div>
-
-                <div class="input-group">
-                    <label for="city">City *</label>
-                    <input type="text" id="city" placeholder="e.g. Lahore, Karachi, Islamabad" required>
-                </div>
-
-                <div class="input-group">
-                    <label for="address">Complete Delivery Address *</label>
-                    <textarea id="address" rows="3" placeholder="House #, Street #, Area Name, Landmark" required></textarea>
-                </div>
-
-                <div class="input-group">
-                    <label for="quantity">Quantity</label>
-                    <input type="number" id="quantity" value="1" min="1" max="10">
-                </div>
-
-                <div class="order-summary-box">
-                    <div class="summary-row">
-                        <span>Product:</span>
-                        <strong>Rivaaj Mahal Hair Oil</strong>
+                <form id="orderForm">
+                    <div class="input-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" placeholder="Enter Your Full Name" autocomplete="name" required>
                     </div>
-                    <div class="summary-row">
-                        <span>Shipping Fee:</span>
-                        <strong class="free-shipping-tag">FREE (COD)</strong>
+
+                    <div class="input-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" placeholder="03XXXXXXXXX" autocomplete="tel" required>
                     </div>
-                    <div class="summary-row total-row">
-                        <span>Total Amount:</span>
-                        <strong id="totalPriceDisplay">Rs. 2,000.00</strong>
+
+                    <div class="input-group">
+                        <label for="city">City *</label>
+                        <input type="text" id="city" placeholder="e.g. Lahore, Karachi, Islamabad" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="address">Complete Delivery Address *</label>
+                        <textarea id="address" rows="3" placeholder="House #, Street #, Area Name, Landmark" required></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" id="quantity" value="1" min="1" max="10">
+                    </div>
+
+                    <div class="order-summary-box">
+                        <div class="summary-row">
+                            <span>Product:</span>
+                            <strong>Rivaaj Mahal Hair Oil</strong>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping Fee:</span>
+                            <strong class="free-shipping-tag">FREE (COD)</strong>
+                        </div>
+                        <div class="summary-row total-row">
+                            <span>Total Amount:</span>
+                            <strong id="totalPriceDisplay">Rs. 2,000.00</strong>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="submit-btn">
+                        <span id="submitBtnText">Confirm Cash on Delivery Order</span>
+                        <span class="submit-btn-spinner" aria-hidden="true"></span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- STEP 2: THANK YOU SUCCESS SCREEN (ENGLISH & URDU) -->
+            <div id="successStep" class="popup-step" style="display: none;">
+                <div class="success-icon-wrapper">
+                    <div class="success-checkmark-circle">
+                        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
                     </div>
                 </div>
 
-                <button type="submit" id="submitBtn" class="submit-btn">
-                    <span id="submitBtnText">Confirm Cash on Delivery Order</span>
-                    <span class="submit-btn-spinner" aria-hidden="true"></span>
+                <h2 class="success-title-en">Thank You! Order Placed 🎉</h2>
+                <h3 class="success-title-ur">آپ کا آرڈر کامیابی سے موصول ہو گیا ہے!</h3>
+
+                <div class="success-details-card">
+                    <p class="success-text-en">Our team will call or message you shortly to confirm your delivery details. Your package will arrive in <strong>2 to 5 working days</strong>.</p>
+                    <hr class="success-divider">
+                    <p class="success-text-ur">ہماری ٹیم جلد ہی آپ سے رابطہ کرے گی۔ آپ کا پارسل <strong>2 سے 5 کام کے دنوں</strong> میں کیش آن ڈیلیوری پر پہنچا دیا جائے گا۔</p>
+                </div>
+
+                <button type="button" id="orderAgainBtn" class="submit-btn order-again-btn">
+                    🔄 Order Again / دوبارہ آرڈر کریں
                 </button>
-            </form>
+            </div>
+
         </div>
     </div>
 
